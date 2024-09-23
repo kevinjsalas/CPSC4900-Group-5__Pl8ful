@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-// AAAAAAAAAAAAAAAAA
+// THIS IS THE DEFAULT CODE THAT COMES WITH THE PROJECT
