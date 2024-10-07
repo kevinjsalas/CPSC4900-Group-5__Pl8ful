@@ -1,9 +1,21 @@
-import { Stack } from "expo-router";
+import React from 'react';
+import { Stack } from 'expo-router';
+import NavigationBar from '@/components/NavigationBar';
+import { StatusBar } from 'expo-status-bar';
 
-export default function RootLayout() {
+
+const RootLayout = () => {
   return (
-    <Stack>
-      <Stack.Screen name="index" />
-    </Stack>
+    <>
+      <Stack screenOptions={{headerShown: false}}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="profile" />
+        <Stack.Screen name="favorites" />
+      </Stack>
+      <NavigationBar />
+      <StatusBar style="auto" />
+    </>
   );
-}
+};
+
+export default RootLayout;
