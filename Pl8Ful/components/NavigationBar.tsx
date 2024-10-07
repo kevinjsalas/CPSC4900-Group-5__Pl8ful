@@ -1,24 +1,28 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import styles from '../app/styles';
+import styles from '../app/styleSheets/styles';
 import { useRouter } from 'expo-router'
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const NavigationBar = () => {
     const router = useRouter();
     return (
         <View style={styles.bottomBar}>
             <TouchableOpacity style={styles.bottomButton} onPress={() => router.navigate('./')}>
-                <FontAwesome name="home" size={24} color="black" />
+                <AntDesign name="home" size={24} color="#34404D" />
                 <Text style={styles.bottomText}>Home</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.bottomButton} onPress={() => router.navigate('./favorites')}>
-                <FontAwesome name="heart" size={24} color="black" />
+                <AntDesign name="hearto" size={24} color="#34404D" />
                 <Text style={styles.bottomText}>Favorites</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.bottomButton} onPress={() => router.navigate('./profile')}>
-                <FontAwesome name="user" size={24} color="black" />
+                <AntDesign name="user" size={24} color="#34404D" />
                 <Text style={styles.bottomText}>Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bottomButton} onPress={() => router.navigate('./login')}>
+                <AntDesign name="lock" size={24} color="#34404D" />
+                <Text style={styles.bottomText}>Login</Text>
             </TouchableOpacity>
         </View>
     );

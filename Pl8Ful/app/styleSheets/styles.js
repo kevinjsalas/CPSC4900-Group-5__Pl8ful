@@ -5,26 +5,28 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       justifyContent: 'space-between',
+      borderRadius: 20,
     },
-
     /* TopBar */
     topBar: {
       marginTop: 0,
-      height: 60,
-      justifyContent: 'center',
-      alignItems: 'center',
+      height: 50,
     },
-    topBarText: {
-      color: 'black',
-      fontSize: 30,
-      fontWeight: 'bold',
+    pageTitle: {
+      marginTop: 10,
+      left: 7,
+      color: '#34404D',
+      fontSize: 24,
+      fontWeight: '900',
     },
 
     /* SearchBar */
     searchContainer: {
-      padding: 10,
-      borderRadius: 10,
-      justifyContent: 'flex-start'
+      top: 10,
+      paddingBottom: 10,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderRadius: 20,
     },
     searchBar: {
       height: 40,
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       paddingHorizontal: 15,
       fontSize: 16,
+      width: '90%',
     },
 
 
@@ -50,19 +53,27 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       color: '#333',
     },
+    linkHeader: {
+      fontSize: 20,
+      fontWeight: '700',
+      color: '#34404D',
+    },
     linkButton: {
       marginTop: 10,
       backgroundColor: '#fff',
       padding: 15,
       borderRadius: 10,
-      shadowColor: '#000',
+      shadowColor: '#34404D',
       shadowOpacity: 0.1,
       shadowRadius: 5,
       elevation: 2,
     },
     linkText: {
-      fontSize: 18,
+      fontSize: 16,
       color: '#333',
+    },
+    linkLocation: {
+      flexDirection: 'row',
     },
     rating: {
       flexDirection: 'row',
@@ -87,7 +98,9 @@ const styles = StyleSheet.create({
     bottomText: {
       marginTop: 5,
       fontSize: 12,
-      color: '#333',
+      fontWeight: 'bold',
+      color: 'black',
+      
     },
   });
 
