@@ -1,5 +1,9 @@
 {
   "expo": {
+    "statusBar": {
+      "style": "auto",
+      "backgroundColor": "#ffffff"
+    },
     "name": "Pl8ful",
     "slug": "Pl8ful",
     "version": "1.0.0",

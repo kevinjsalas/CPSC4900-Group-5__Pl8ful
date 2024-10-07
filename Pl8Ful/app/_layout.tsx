@@ -13,7 +13,7 @@ const RootLayout = () => {
         <Stack.Screen name="favorites" />
       </Stack>
       <NavigationBar />
-      <StatusBar style="auto" />
+      <StatusBar />
     </>
   );
 };
