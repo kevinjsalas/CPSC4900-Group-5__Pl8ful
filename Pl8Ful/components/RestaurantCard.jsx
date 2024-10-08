@@ -8,7 +8,7 @@ import styles from "../app/styleSheets/styles";
 // Mock function to fetch restaurant data
 const fetchRestaurant = async () => {
     return [
-        { id: 1, name: "McDonald's", location: "123 Fake St", hours: "24/7", rating: 4.5 },
+        { id: 1, name: "McDonalds", location: "123 Fake St", hours: "24/7", rating: 4.5 },
         { id: 2, name: "Burger King", location: "456 Real St", hours: "24/7", rating: 4.0 },
         { id: 3, name: "Wendy's", location: "789 Imaginary St", hours: "24/7"},
         { id: 4, name: "Taco Bell", location: "012 Madeup St", hours: "24/7", rating: 3.5 },
