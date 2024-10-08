@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TextInput, ImageBackground } from 'react-native';
-import styles from './styleSheets/styles';
+import styles from '../styleSheets/styles';
 import RestaurantCard from '@/components/RestaurantCard';
 
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchBar}
-          placeholder="Search for restaurants..."
+          placeholder="Search for restaurants"
           placeholderTextColor="#888"
         />
       </View>

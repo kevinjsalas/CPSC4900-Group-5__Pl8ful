@@ -8,11 +8,10 @@ const RootLayout = () => {
   return (
     <>
       <Stack screenOptions={{headerShown: false}}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="profile" />
-        <Stack.Screen name="favorites" />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/login" options={{presentation: 'modal'}}/>
       </Stack>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <StatusBar />
     </>
   );

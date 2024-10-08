@@ -6,21 +6,25 @@ const loginStyles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ec8677"
+        // backgroundColor: "#ec8677",
+    },
+    background: {
+        flex: 1,
     },
     loginHeader: {
         fontSize: 60,
-        // fontFamily: "ReemKufiFun-VariableFont_wght",
         fontWeight: "700",
-        color: "#f0f0f0",
+        color: "white",
         marginBottom: 20,
+        backgroundColor: "#ec8677",
+        
     },
     loginText: {
         fontSize: 20,
         color: "grey"
     },
     loginInput: {
-        width: "90%",
+        width: "80%",
         padding: 10,
         borderWidth: 1,
         borderColor: "#ccc",
