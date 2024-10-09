@@ -56,8 +56,9 @@ const styles = StyleSheet.create({
     },
     linkHeader: {
       fontSize: 20,
-      fontWeight: '700',
+      fontWeight: '800',
       color: '#34404D',
+      marginBottom: 10,
     },
     linkButton: {
       marginTop: 10,
@@ -73,12 +74,21 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: '#333',
     },
+    linkHours: {
+      fontSize: 16,
+      color: '#333',
+      marginBottom: 3,
+      marginLeft: 3,
+    },
     linkLocation: {
       flexDirection: 'row',
+      marginBottom: 3,
+      marginLeft: 0,
     },
     rating: {
       flexDirection: 'row',
       marginTop: 5,
+      marginLeft: 3,
     },
 
 

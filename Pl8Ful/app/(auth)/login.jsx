@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"; 
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, Button } from "react-native";
 import loginStyles from "../styleSheets/loginStyles";
-import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "expo-router";
 import { ImageBackground } from "react-native";
