@@ -59,11 +59,11 @@ const RestaurantScreen = () => {
                     </View>
                 </View>
                 <View style={restaurantStyles.filterBar}>
-                    <Text style={restaurantStyles.filterHeader}>Reviews</Text>
+                    <Text style={restaurantStyles.filterHeader1}>Reviews</Text>
                     <View style={restaurantStyles.filterButton}>
-                        <Text style={restaurantStyles.filterHeader}>Sort by:  </Text>
+                        <Text style={restaurantStyles.filterHeader2}>Sort by:  </Text>
                         <TouchableOpacity style={restaurantStyles.filterButton} onPress={() => {}}>
-                            <Text style={restaurantStyles.filterHeader}>Rating</Text>
+                            <Text style={restaurantStyles.filterHeader2}>Rating</Text>
                             <Entypo name="chevron-down" size={24} color="#EC8677" />
                         </TouchableOpacity>
                     </View>

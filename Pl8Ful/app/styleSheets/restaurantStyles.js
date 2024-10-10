@@ -89,31 +89,36 @@ const restaurantStyles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20
     },
-    filterHeader: {
+    filterHeader1: {
         fontSize: 18,
         fontWeight: "bold",
         color: "#34404D"
     },
+    filterHeader2: {
+        fontSize: 12,
+        fontWeight: "600",
+        color: "#34404D"
+    },
     filterButton: {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
     },
     reviewsContainer: {
         marginBottom: 20,
         flex: 1
     },
     reviewCard: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F0F0F0",
         borderRadius: 10,
         padding: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 5,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
