@@ -13,7 +13,7 @@ const ProfileScreen = () => {
             <TouchableOpacity style={profileStyles.button} onPress={() => router.push("/login")}>
                 <Text style={profileStyles.buttonText}>Sign in</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={profileStyles.button} onPress={() => router.push("/login")}>
+            <TouchableOpacity style={profileStyles.button} onPress={() => router.push("/create")}>
                 <Text style={profileStyles.buttonText}>Create New Account</Text>
             </TouchableOpacity>
         </View>

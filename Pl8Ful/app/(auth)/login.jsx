@@ -6,16 +6,9 @@ import { useRouter } from "expo-router";
 import { ImageBackground } from "react-native";
 
 
-export const Register = () => {
-    const [name, setName] = useState("");
+const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-};
-
-
-
-const LoginScreen = () => {
     return (
         <ImageBackground 
             source={require('../../assets/images/food_bg.png')}
@@ -24,7 +17,7 @@ const LoginScreen = () => {
             <View style={loginStyles.loginContainer}>
                 <Text style={loginStyles.loginHeader}>Pl8FUL!</Text>
                 <TextInput 
-                    placeholder="Username" 
+                    placeholder="Email" 
                     value={""}
                     placeholderTextColor= "#8a8a8a" 
                     style={loginStyles.loginInput} 
