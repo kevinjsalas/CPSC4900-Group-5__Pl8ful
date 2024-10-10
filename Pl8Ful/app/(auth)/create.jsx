@@ -1,15 +1,18 @@
 import React, { useState } from "react"; 
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ImageBackground } from "react-native";
 import loginStyles from "../styleSheets/loginStyles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from "expo-router";
 
 const CreateUserScreen = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const createUser = async (username, email, password) => {
-        setLoading(true); // Start loading
+        setLoading(true);
         try {
             const response = await fetch('http://192.168.1.150:3000/createUser/create', {
                 method: 'PUT',
@@ -23,20 +26,22 @@ const CreateUserScreen = () => {
                 }),
             });
 
-            const responseText = await response.text(); // Get response as text
-            console.log('Response Status:', response.status); // Log the response status
-            console.log('Response Text:', responseText); // Log the response text
+            const responseText = await response.text();
+            console.log('Response Status:', response.status);
+            console.log('Response Text:', responseText);
 
             if (response.ok) {
-                const responseData = JSON.parse(responseText); // Parse response if OK
+                const responseData = JSON.parse(responseText);
+                await AsyncStorage.setItem('username', username);
                 console.log('User created:', responseData);
+                router.replace('/profile')
             } else {
-                console.log('User creation failed:', responseText); // Log the error response
+                console.log('User creation failed:', responseText);
             }
         } catch (error) {
             console.error('Error:', error);
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false);
         }
     };
 
