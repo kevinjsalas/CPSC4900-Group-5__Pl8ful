@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import profileStyles from "../styleSheets/profileStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import UserProfile from "../../components/UserProfile";
 
 const ProfileScreen = () => {
     const [username, setUsername] = useState(null);
@@ -26,12 +27,7 @@ const ProfileScreen = () => {
     return (
         <>
             {username ? (
-                <View style={profileStyles.container}>
-                    <Text style={profileStyles.header}>Welcome, {username}!</Text>
-                    <TouchableOpacity style={profileStyles.button} onPress={handleSignOut}>
-                        <Text style={profileStyles.buttonText}>Sign out</Text>
-                    </TouchableOpacity>
-                </View>
+                <UserProfile />
             ) : (
                 <View style={profileStyles.container}>
                     <View styles={profileStyles.headerContainer}>
