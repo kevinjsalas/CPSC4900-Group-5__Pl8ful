@@ -2,31 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import profileStyles from "../styleSheets/profileStyles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signOut } from "../../components/UserFunctions";
+import { auth } from "../../firebaseConfig";
 import UserProfile from "../../components/UserProfile";
 
+
 const ProfileScreen = () => {
-    const [username, setUsername] = useState(null);
-
-    useEffect(() => {
-        const checkLoggedIn = async () => {
-            const storedUsername = await AsyncStorage.getItem('username');
-            if (storedUsername) {
-                setUsername(storedUsername);
-            }
-        };
-
-        checkLoggedIn();
-    }, []);
-
-    const handleSignOut = async () => {
-        await AsyncStorage.removeItem('username');
-        setUsername(null);
-    };
-
+    const user = auth.currentUser;
     return (
         <>
-            {username ? (
+            {user ? (
                 <UserProfile />
             ) : (
                 <View style={profileStyles.container}>

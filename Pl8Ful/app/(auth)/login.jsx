@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"; 
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, Button } from "react-native";
 import loginStyles from "../styleSheets/loginStyles";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { useRouter } from "expo-router";
 import { ImageBackground } from "react-native";
+import signIn from "../../components/SignInComponent";
 
 
 const LoginScreen = () => {
@@ -18,21 +17,20 @@ const LoginScreen = () => {
                 <Text style={loginStyles.loginHeader}>Pl8FUL!</Text>
                 <TextInput 
                     placeholder="Email" 
-                    value={""}
                     placeholderTextColor= "#8a8a8a" 
                     style={loginStyles.loginInput} 
-                    onChangeText={() => {}}
+                    onChangeText={text => setEmail(text)}
                     autoCapitalize="none"
                 />
                 <TextInput 
                     placeholder="Password" 
                     placeholderTextColor= "#8a8a8a" 
                     style={loginStyles.loginInput}
-                    onChangeText={() => {}}
+                    onChangeText={text => setPassword(text)}
                     autoCapitalize="none"
                     secureTextEntry
                 />
-                <TouchableOpacity style={loginStyles.loginButton} onPress={() => {}}>
+                <TouchableOpacity style={loginStyles.loginButton} onPress={() => signIn(email, password)}>
                     <Text style={loginStyles.buttonText}>Login</Text>
                 </TouchableOpacity> 
             </View>
