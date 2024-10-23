@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#f0f0f0',
-      justifyContent: 'space-between',
       borderRadius: 20,
     },
     /* TopBar */
@@ -24,7 +23,6 @@ const styles = StyleSheet.create({
     searchContainer: {
       top: 10,
       paddingBottom: 10,
-      justifyContent: 'flex-start',
       alignItems: 'center',
       borderRadius: 20,
     },
@@ -41,9 +39,10 @@ const styles = StyleSheet.create({
 
     /* RestaurantCard.jsx */
     linksContainer: {
-      flex: 1,
       paddingHorizontal: 10,
       marginTop: 0,
+      height: 765,
+      paddingBottom: 150,
     },
     section: {
       marginBottom: 20,
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     sectionTitle: {
       fontSize: 20,
       fontWeight: 'bold',
-      marginBottom: 10,
+      marginBottom: 0,
       color: '#333',
     },
     linkHeader: {

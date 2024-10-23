@@ -1,10 +1,20 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import NavigationBar from '@/components/NavigationBar';
 import { StatusBar } from 'expo-status-bar';
-
+import { monitorAuthState } from '../components/UserFunctions'
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 const RootLayout = () => {
+  const [user, setUser] = useState<any>(null);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        monitorAuthState();
+        return () => unsubscribe();
+    }, []);
   return (
     <>
       <Stack screenOptions={{headerShown: false}}>

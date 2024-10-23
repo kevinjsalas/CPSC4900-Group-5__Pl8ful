@@ -2,21 +2,19 @@ import { StyleSheet } from "react-native";
 
 const restaurantStyles = StyleSheet.create({
     topBar: {
-        marginTop: 0,
-        height: 50,
-        width: "110%",
-        },
+      marginTop: 0,
+      marginBottom: 0,
+      height: 50,
+    },
     screenContainer: {
         flex: 1,
         backgroundColor: "#EC8677",
-        justifyContent: "center"
     },
     card: {
         backgroundColor: "#FFFFFF",
         borderRadius: 15,
-        height: "87%",
-        width: "90%",
-        marginLeft: "5%",
+        height: "95%",
+        width: "100%",
         padding: 20,
         marginTop: 5,
         shadowColor: "#000",

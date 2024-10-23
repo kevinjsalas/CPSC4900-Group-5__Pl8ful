@@ -1,45 +1,24 @@
 import React, { useState } from "react"; 
 import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, ImageBackground } from "react-native";
 import loginStyles from "../styleSheets/loginStyles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from "expo-router";
+import { createUser } from "../../components/UserFunctions";
 
 const CreateUserScreen = () => {
-    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const createUser = async (username, email, password) => {
+    const createNew = async (firstName, lastName, email, password) => {
         setLoading(true);
         try {
-            const response = await fetch('http://192.168.1.150:3000/createUser/create', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    email: email,
-                    password: password,
-                }),
-            });
-
-            const responseText = await response.text();
-            console.log('Response Status:', response.status);
-            console.log('Response Text:', responseText);
-
-            if (response.ok) {
-                const responseData = JSON.parse(responseText);
-                await AsyncStorage.setItem('username', username);
-                console.log('User created:', responseData);
-                router.replace('/profile')
-            } else {
-                console.log('User creation failed:', responseText);
-            }
+          await createUser(firstName, lastName, email, password);
+          router.replace('/profile');
         } catch (error) {
-            console.error('Error:', error);
+            console.log('Error creating user: ', error.message);
         } finally {
             setLoading(false);
         }
@@ -57,10 +36,17 @@ const CreateUserScreen = () => {
                     <>
                         <Text style={loginStyles.loginHeader}>Pl8FUL!</Text>
                         <TextInput 
-                            placeholder="Username" 
+                            placeholder="First Name" 
                             placeholderTextColor="#8a8a8a" 
                             style={loginStyles.loginInput} 
-                            onChangeText={text => setUsername(text)}
+                            onChangeText={text => setFirstName(text)}
+                            autoCapitalize="none"
+                        />
+                        <TextInput 
+                            placeholder="Last Name" 
+                            placeholderTextColor="#8a8a8a" 
+                            style={loginStyles.loginInput} 
+                            onChangeText={text => setLastName(text)}
                             autoCapitalize="none"
                         />
                         <TextInput 
@@ -80,7 +66,7 @@ const CreateUserScreen = () => {
                         />
                         <TouchableOpacity 
                             style={loginStyles.createButton} 
-                            onPress={() => createUser(username, email, password)}
+                            onPress={() => createNew(firstName, lastName, email, password)}
                         >
                             <Text style={loginStyles.buttonText}>Create Account</Text>
                         </TouchableOpacity> 
