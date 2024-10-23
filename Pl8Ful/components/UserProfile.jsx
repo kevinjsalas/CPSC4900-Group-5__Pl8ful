@@ -1,11 +1,37 @@
-import { View, Text, TouchableOpacity, Image, ImageBackground } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, Image, ImageBackground, ActivityIndicator } from "react-native";
 import profileStyles from "../app/styleSheets/profileStyles";
 import { auth } from "../firebaseConfig";
-import { signOut } from "./UserFunctions";
+import { signOut, getUserInfo } from "./UserFunctions";
 
-
-const renderProfile = () => {
+const RenderProfile = () => {
+    
+    const [userData, setUserData] = useState({});
+    const [loading, setLoading] = useState(true);
     const user = auth.currentUser;
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            
+            if (user) {
+                const data = await getUserInfo(user.uid);
+                setUserData(data);
+                setLoading(false);
+            }
+            setLoading(false);
+        };
+        fetchUserData();
+    },[]);
+
+    if (loading) {
+        return (
+            <View style={profileStyles.container2}>
+            <ActivityIndicator size="large" color="#34404D" />
+            </View>
+        );
+    };
+
+
     return (
         <View style={profileStyles.container2}>
             <ImageBackground
@@ -14,12 +40,12 @@ const renderProfile = () => {
                 resizeMode="cover"
             />
             <View style={profileStyles.headerContainer}>
-                <TouchableOpacity style={""} onPress={{}}>
+                <TouchableOpacity style={""} onPress={() => {}}>
                     <View style={profileStyles.userPhoto}>
                         <Image source={user.photoURL}></Image>
                     </View>
                 </TouchableOpacity>
-                <Text style={profileStyles.header}> {user.uid} </Text>
+                <Text style={profileStyles.header}>{userData.firstName}</Text>
             </View>
             <View style={profileStyles.divider}></View>
             <View style={profileStyles.profileContent}>
@@ -30,12 +56,14 @@ const renderProfile = () => {
                 <TouchableOpacity style={{}}>
                     <Text style={{}}></Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={profileStyles.signOut} onPress={signOut}>
-                    <Text style={profileStyles.buttonText}>Sign Out</Text>
-                </TouchableOpacity> 
+                <View style={profileStyles.buttonContainer}>
+                    <TouchableOpacity style={profileStyles.signOut} onPress={signOut}>
+                        <Text style={profileStyles.buttonText}>Sign Out</Text>
+                    </TouchableOpacity> 
+                </View>
             </View>
         </View>
     )
 };
 
-export default renderProfile;
+export default RenderProfile;

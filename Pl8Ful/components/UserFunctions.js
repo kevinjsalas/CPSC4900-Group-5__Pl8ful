@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setDoc, getDoc, doc } from 'firebase/firestore';
@@ -45,16 +45,6 @@ export const createUser = (firstName, lastName, email, password) => {
     handleSignUp();
 };
 
-export const checkLoggedIn = () => {
-    const checkLoggedIn = async () => {
-        const uid = auth.currentUser;
-        if (user) {
-            console.log('User is signed in');
-        } else {
-            console.log('User is not signed in');
-        }
-    }
-};
 
 export const monitorAuthState = () => {
     onAuthStateChanged(auth, (user) => {
@@ -69,4 +59,22 @@ export const monitorAuthState = () => {
 export const isUserLoggedIn = () => {
     return auth.currentUser !== null;
 };
+
+export const getUserInfo = async (uid) => {
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const userDoc = await getDoc(userDocRef);
   
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log('User data found: ', userData);
+        return userData;
+      } else {
+        console.log('No user data found');
+        return null;
+      }
+    } catch (error) {
+      console.log('Error getting user data: ', error.message);
+      return null;
+    }
+  };

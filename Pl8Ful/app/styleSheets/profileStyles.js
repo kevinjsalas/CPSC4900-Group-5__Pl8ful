@@ -21,9 +21,9 @@ headerContainer: {
     padding: 20,
 },
 userPhoto: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 125,
+    height: 125,
+    borderRadius: 63,
     backgroundColor: "#F0F0F0",
     justifyContent: "center",
     alignItems: "center",
@@ -54,6 +54,11 @@ signOut: {
     borderRadius: 10,
     bottom: 0
 },
+buttonContainer: {
+    width: "100%",
+    justifyContent: "center",  
+    alignItems: "center",
+},
 buttonText: {
     fontSize: 18,
     color: "#34404D",
@@ -71,10 +76,12 @@ topBar: {
 },
 divider: {
     height: 2,
-    width: "90%",
-    backgroundColor: "#34404D",
+    width: "100%",
+    backgroundColor: "#F0F0F0",
     marginVertical: 20,
     borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
 },
 
 });
