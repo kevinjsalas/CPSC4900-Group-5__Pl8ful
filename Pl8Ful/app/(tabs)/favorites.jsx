@@ -2,9 +2,11 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 import { router } from "expo-router";
 import favoritesStyles from "../styleSheets/favoritesStyles";
-
+import { fetchRestaurant } from "../../components/RestaurantCard";
 
 const FavoritesScreen = () => {
+    restaurants = fetchRestaurant();
+    console.log(restaurants);
     return (
         <View style={favoritesStyles.container}>
             <View>

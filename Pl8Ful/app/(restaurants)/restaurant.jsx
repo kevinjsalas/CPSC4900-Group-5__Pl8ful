@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router"
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
 import restaurantStyles from "../styleSheets/restaurantStyles";
 
@@ -16,7 +16,12 @@ const RestaurantScreen = () => {
             />
             <View style={restaurantStyles.card}>
                 <View style={restaurantStyles.informationCard}>
-                    <Text style={restaurantStyles.header}>{name}</Text>
+                    <View style={restaurantStyles.headerContainer}>
+                        <Text style={restaurantStyles.header}>{name}</Text>
+                        <TouchableOpacity onPress={() => {}}>
+                            <AntDesign name="hearto" size={32} color="#EC8677"/>
+                        </TouchableOpacity>
+                    </View>
                     <Text style={restaurantStyles.location}>{location}</Text>
                     <Text style={restaurantStyles.house}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>

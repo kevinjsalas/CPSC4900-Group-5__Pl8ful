@@ -29,6 +29,12 @@ const restaurantStyles = StyleSheet.create({
     informationCard: {
         marginBottom: 50
     },
+    headerContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        textAlign: "center",
+        alignItems: "center",
+    },
     header: {
         fontSize: 40,
         fontWeight: "900",
