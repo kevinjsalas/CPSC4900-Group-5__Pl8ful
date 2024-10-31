@@ -40,7 +40,8 @@ const RestaurantCard = () => {
                             name: item.name,
                             location: item.location,
                             hours: item.hours,
-                            rating: item.rating
+                            rating: item.rating,
+                            rid: item.id
                         } 
                     })
                 }>

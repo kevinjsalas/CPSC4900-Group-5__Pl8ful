@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
+
+
 const RootLayout = () => {
   const [user, setUser] = useState<any>(null);
     useEffect(() => {
@@ -22,6 +24,7 @@ const RootLayout = () => {
         <Stack.Screen name="(auth)/login" options={{presentation: 'modal'}}/>
         <Stack.Screen name="(auth)/create" options={{presentation: 'modal'}}/>
         <Stack.Screen name="(restaurants)/restaurant" />
+        <Stack.Screen name="(reviews)/review" options={{presentation: 'modal'}}/>
       </Stack>
       <StatusBar />
     </>

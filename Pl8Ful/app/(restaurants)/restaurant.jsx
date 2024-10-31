@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router"
+import { View, Text, TouchableOpacity, ImageBackground, ScrollView, Touchable } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router"
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
 import restaurantStyles from "../styleSheets/restaurantStyles";
 
 const RestaurantScreen = () => {
-    const { name, location, hours, rating } = useLocalSearchParams();
+    const { name, location, hours, rating, rid } = useLocalSearchParams();
+    const router = useRouter();
     return (
         <View style={restaurantStyles.screenContainer}>
             <ImageBackground
@@ -23,10 +24,19 @@ const RestaurantScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <Text style={restaurantStyles.location}>{location}</Text>
-                    <Text style={restaurantStyles.house}>{hours}</Text>
+                    <Text style={restaurantStyles.hours}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
+                    <TouchableOpacity onPress={() => 
+                        router.push({
+                            pathname: "/review", 
+                            params: { 
+                                rid: rid
+                            } 
+                        })}>
+                        <Text style={restaurantStyles.leaveReviewButton}>Leave a review</Text>
+                    </TouchableOpacity>
                 </View>
-                <View styles={restaurantStyles.starBreakdown}>
+                <View >
                     <View style={restaurantStyles.starBar}>
                         <Text style={restaurantStyles.starHead}>5</Text>
                         <FontAwesome name="star" size={18} color="#EC8677" />

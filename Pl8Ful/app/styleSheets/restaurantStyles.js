@@ -48,12 +48,15 @@ const restaurantStyles = StyleSheet.create({
     hours: {
         fontSize: 18,
         color: "#34404D",
-        marginTop: 10
     },
     rating: {
         fontSize: 18,
         color: "#34404D",
         marginTop: 10
+    },
+    leaveReviewButton: {
+        fontSize: 14,
+        color: "#B0B0B0",
     },
     starBreakdown: {
         flexDirection: "column",
@@ -112,17 +115,9 @@ const restaurantStyles = StyleSheet.create({
         flex: 1
     },
     reviewCard: {
-        backgroundColor: "#F0F0F0",
+        backgroundColor: "#fafafa",
         borderRadius: 10,
         padding: 20,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2
-        // },
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-        // elevation: 5,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
