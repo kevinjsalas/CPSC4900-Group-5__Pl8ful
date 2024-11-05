@@ -4,9 +4,11 @@ import { useLocalSearchParams } from "expo-router"
 import { FontAwesome } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
 import restaurantStyles from "../styleSheets/restaurantStyles";
+import ImageUpload from '../styleSheets/ImageUpload';
 
 const RestaurantScreen = () => {
     const { name, location, hours, rating } = useLocalSearchParams();
+    
     return (
         <View style={restaurantStyles.screenContainer}>
             <ImageBackground
@@ -20,6 +22,9 @@ const RestaurantScreen = () => {
                     <Text style={restaurantStyles.location}>{location}</Text>
                     <Text style={restaurantStyles.house}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
+                    <View style={restaurantStyles.imageUploadContainer}>
+                    <ImageUpload onImageUpload={(uri) => console.log("Image uploaded:", uri)} />
+                </View>
                 </View>
                 <View styles={restaurantStyles.starBreakdown}>
                     <View style={restaurantStyles.starBar}>
