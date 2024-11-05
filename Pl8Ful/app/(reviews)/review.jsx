@@ -15,7 +15,6 @@ const ReviewScreen = () => {
     const [rating, setRating] = useState(0);
     const router = useRouter();
     const rid = useLocalSearchParams();
-    const [stars, setStars] = useState(0);
     const user = auth.currentUser;
 
     const renderStars = () => {
