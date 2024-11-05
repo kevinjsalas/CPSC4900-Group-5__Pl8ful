@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, Button } fr
 import reviewStyles from "../styleSheets/reviewStyles";
 import { FontAwesome } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { createReview } from "../../components/ReviewFunctions";
+import { auth } from "../../firebaseConfig";
+
 
 
 const ReviewScreen = () => {
@@ -12,6 +15,8 @@ const ReviewScreen = () => {
     const [rating, setRating] = useState(0);
     const router = useRouter();
     const rid = useLocalSearchParams();
+    const [stars, setStars] = useState(0);
+    const user = auth.currentUser;
 
     const renderStars = () => {
         const stars = [];
@@ -25,9 +30,11 @@ const ReviewScreen = () => {
                     />
                 </TouchableOpacity>
             );
+            
         }
         return stars;
     };
+    console.log(rid);
 
     return (
         <View style={reviewStyles.container}>
@@ -53,7 +60,7 @@ const ReviewScreen = () => {
                     multiline={true}
                     maxLength={500}
                 />
-                <TouchableOpacity style={reviewStyles.submitButton} title="Submit" onPress={() => {}}>
+                <TouchableOpacity style={reviewStyles.submitButton} title="Submit" onPress={() => {createReview(user.uid, rid, rating, title, text)}}>
                     <Text style={{ color: "#FFFFFF", textAlign: "center", fontSize: 18, fontWeight: 700 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
