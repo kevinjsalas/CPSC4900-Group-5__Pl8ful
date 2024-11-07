@@ -5,6 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { createReview } from "../../components/ReviewFunctions";
 import { auth } from "../../firebaseConfig";
+import ImageUpload from "../../components/ImageUpload";
 
 
 
@@ -59,6 +60,7 @@ const ReviewScreen = () => {
                     multiline={true}
                     maxLength={500}
                 />
+                <ImageUpload />
                 <TouchableOpacity style={reviewStyles.submitButton} title="Submit" onPress={() => {createReview(user.uid, rid, rating, title, text)}}>
                     <Text style={{ color: "#FFFFFF", textAlign: "center", fontSize: 18, fontWeight: 700 }}>Submit</Text>
                 </TouchableOpacity>

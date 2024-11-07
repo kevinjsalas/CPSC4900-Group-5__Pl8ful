@@ -8,11 +8,12 @@ import styles from "../app/styleSheets/styles";
 // Mock function to fetch restaurant data
 export const fetchRestaurant = async () => {
     return [
-        { id: "mcdonalds_gunbarrel", name: "McDonalds", location: "5.1 mi", hours: "24/7", rating: 5 },
-        { id: 2, name: "Burger King", location: "4.8 mi", hours: "24/7", rating: 4.0 },
-        { id: 3, name: "Wendy's", location: "8.1 mi", hours: "24/7"},
-        { id: 4, name: "Taco Bell", location: "10.3 mi", hours: "24/7", rating: 3.5 },
-        { id: 5, name: "KFC", location: "7.2 mi", hours: "24/7", rating: 3.0 }
+        { rid: 1, name: "Alleia", location: "25 E Main St, Chattanooga, TN 37408", hours: "M-F: 5 - 9PM", rating: 4 },
+        { rid: 2, name: "STIR", location: "1444 Market St, Chattanooga, TN 37402", hours: "M-F: 11AM - 9PM", rating: 4 },
+        { rid: 3, name: "Upscale Chophouse", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
+        { rid: 4, name: "Scottie's On The River", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
+        { rid: 5, name: "Bridgeman's Chophouse", location: "107 W M.L.K. Blvd, Chattanooga, TN 37402", hours: "M-F: 5-10PM", rating: 4 },
+        { rid: 6, name: "Tony's Pasta Shop", location: "212 High St, Chattanooga, TN 37403", hours: "M-F: 11AM - 10PM", rating: 4 },
     ];
 };
 
@@ -36,12 +37,12 @@ const RestaurantCard = () => {
                 onPress={() => 
                     router.push({
                         pathname: "/restaurant", 
-                        params: { 
+                        params: {
+                            rid: item.rid,
                             name: item.name,
                             location: item.location,
                             hours: item.hours,
-                            rating: item.rating,
-                            rid: item.id
+                            rating: item.rating
                         } 
                     })
                 }>
@@ -63,7 +64,7 @@ const RestaurantCard = () => {
             <FlatList
                 data={restaurant}
                 renderItem={renderRestaurant}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.rid.toString()}
             />
         </View>
     );

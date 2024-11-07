@@ -35,7 +35,7 @@ const reviewStyles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: "#fafafa",
         borderRadius: 10,
-        height: 350,
+        height: 175,
         padding: 10,
         textAlignVertical: "top"
     },
