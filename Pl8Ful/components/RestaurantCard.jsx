@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import styles from "../app/styleSheets/styles";
 
 // Mock function to fetch restaurant data
-const fetchRestaurant = async () => {
+export const fetchRestaurant = async () => {
     return [
         { id: 1, name: "McDonalds", location: "5.1 mi", hours: "24/7", rating: 5 },
         { id: 2, name: "Burger King", location: "4.8 mi", hours: "24/7", rating: 4.0 },
