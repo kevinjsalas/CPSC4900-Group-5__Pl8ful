@@ -4,9 +4,9 @@ import { useRouter } from "expo-router";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { FontAwesome } from '@expo/vector-icons';
 import favoritesStyles from "../app/styleSheets/favoritesStyles";
-import { getFavorites } from "../app/simDB/favoriteRestaurants";
 import { auth } from "../firebaseConfig";
 import { useFocusEffect } from '@react-navigation/native';
+import { getRestaurant } from './DatabaseCalls'
 
 
 const FavoritesCard = () => {
@@ -14,16 +14,10 @@ const FavoritesCard = () => {
     const router = useRouter();
     const user = auth.currentUser;
 
-    useFocusEffect(
-        React.useCallback(() => {
-            const loadData = async () => {
-                const data = await getFavorites(user.uid);
-                setRestaurant(data);
-            };
-            loadData();
-            console.log(restaurant);
-        }, [user.uid])
-    );
+    // Was previously using AsyncStorage for favorite restaurants.
+    // Currently working on switching this over to the Firestore Database
+    // Need to pull restaurant data here
+    
 
     const renderRestaurant = ({ item }) => {
         return (
@@ -55,13 +49,28 @@ const FavoritesCard = () => {
     };
 
     return (
-        <View>
-            <FlatList
-                data={restaurant}
-                renderItem={renderRestaurant}
-                keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
-            />
-        </View>
+        user?.uid == null ? (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={[favoritesStyles.linkHeader, { marginBottom: 100 }]}>
+                    Please sign in to add favorites
+                </Text>
+            </View>
+        ) : restaurant.length == 0 ? (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={[favoritesStyles.linkHeader, { marginBottom: 100 }]}>No Favorites</Text>
+                <TouchableOpacity style={favoritesStyles.linkButton} onPress={() => {}}>
+                    <Text>Test functions</Text>
+                </TouchableOpacity>
+            </View>
+        ) : (
+            <View>
+                <FlatList
+                    data={restaurant}
+                    renderItem={renderRestaurant}
+                    keyExtractor={(item, index) => (item.id ? item.id.toString() : index.toString())}
+                />
+            </View>
+        )
     );
 };
 

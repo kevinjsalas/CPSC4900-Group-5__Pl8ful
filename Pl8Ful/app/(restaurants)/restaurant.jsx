@@ -10,8 +10,8 @@ import { useState, useEffect } from "react";
 
 
 const RestaurantScreen = () => {
-    const { rid, name, location, hours, rating } = useLocalSearchParams();
-    const restaurant = { rid, name, location, hours, rating };
+    const { rid, name, address, hours, rating } = useLocalSearchParams();
+    const restaurant = { rid, name, address, hours, rating };
     const router = useRouter();
     const user = auth.currentUser;
 
@@ -55,7 +55,7 @@ const RestaurantScreen = () => {
                             }
                         </TouchableOpacity>
                     </View>
-                    <Text style={restaurantStyles.location}>{location}</Text>
+                    <Text style={restaurantStyles.location}>{address}</Text>
                     <Text style={restaurantStyles.hours}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
                     <TouchableOpacity onPress={() => 

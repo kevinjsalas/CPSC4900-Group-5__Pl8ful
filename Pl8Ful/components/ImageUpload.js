@@ -72,9 +72,9 @@ const ImageUpload = () => {
   };
 
   const handleMultipleImageUpload = async () => {
-    const results = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsMultipleSelection: true,
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images', 'videos'],
+      allowsEditing: true,
       quality: 1,
     });
 
@@ -118,17 +118,6 @@ const ImageUpload = () => {
           )}
         </View>
       </TouchableOpacity>
-
-      {/* Display list of images from the backend */}
-      {/* <FlatList
-        data={imageList}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleImagePress(item)}>
-            <Image source={{ uri: item }} style={styles.storedImage} resizeMode="cover" />
-          </TouchableOpacity>
-        )}
-      /> */}
 
       {/* Modal to display selected image */}
       {selectedImage && (

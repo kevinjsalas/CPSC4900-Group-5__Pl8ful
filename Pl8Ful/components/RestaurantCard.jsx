@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from "../app/styleSheets/styles";
+import { getAllRestaurants } from './DatabaseCalls'
 
 // Mock function to fetch restaurant data
 export const fetchRestaurant = async () => {
@@ -24,10 +25,13 @@ const RestaurantCard = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            const data = await fetchRestaurant();
+            const data = await getAllRestaurants();
             setRestaurant(data);
+            console.log(data)
+            // Add in a way to sort after restaurant data is recieved
         };
         loadData();
+        
     }, []);
 
     const renderRestaurant = ({ item }) => {
@@ -39,10 +43,10 @@ const RestaurantCard = () => {
                         pathname: "/restaurant", 
                         params: {
                             rid: item.rid,
-                            name: item.name,
-                            location: item.location,
-                            hours: item.hours,
-                            rating: item.rating
+                            name: item.name ?? '',
+                            address: item.address ?? '',
+                            hours: item.hours ?? '',
+                            rating: item.rating ?? null,
                         } 
                     })
                 }>
@@ -50,7 +54,7 @@ const RestaurantCard = () => {
                     <Text style={styles.linkHeader}>{item.name}</Text>
                     <View style={styles.linkLocation}>
                         <EvilIcons name="location" size={20} color="#34404D" />
-                        <Text style={styles.linkText}>{item.location}</Text>
+                        <Text style={styles.linkText}>{item.address}</Text>
                     </View>
                     <Text style={styles.linkHours}>Hours: {item.hours}</Text>
                     <Text style={styles.rating}>{starRating(item.rating)}</Text>
@@ -64,7 +68,7 @@ const RestaurantCard = () => {
             <FlatList
                 data={restaurant}
                 renderItem={renderRestaurant}
-                keyExtractor={(item) => item.rid.toString()}
+                keyExtractor={(item) => item.rid != null ? item.rid.toString() : ''}
             />
         </View>
     );
