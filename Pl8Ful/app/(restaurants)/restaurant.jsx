@@ -1,12 +1,41 @@
 import React from "react";
-import { View, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router"
-import { FontAwesome } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, ImageBackground, ScrollView, Touchable } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router"
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
 import restaurantStyles from "../styleSheets/restaurantStyles";
+import { getFavorites, removeFavorite, saveFavorite, checkFavorite} from "../simDB/favoriteRestaurants";
+import { auth } from "../../firebaseConfig";
+import { useState, useEffect } from "react";
+
 
 const RestaurantScreen = () => {
-    const { name, location, hours, rating } = useLocalSearchParams();
+    const { rid, name, address, hours, rating } = useLocalSearchParams();
+    const restaurant = { rid, name, address, hours, rating };
+    const router = useRouter();
+    const user = auth.currentUser;
+
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    useEffect(() => {
+        const fetchFavoriteStatus = async () => {
+            if (user) {
+                const favoriteStatus = await checkFavorite(restaurant.rid, user.uid);
+                setIsFavorite(favoriteStatus);
+            }
+        };
+        fetchFavoriteStatus();
+    }, [user, restaurant.rid]);
+
+    const handleFavoritePress = async () => {
+        if (user) {
+            await saveFavorite(restaurant, user.uid);
+            setIsFavorite((prev) => !prev);
+        } else {
+            console.log("User is not authenticated.");
+        }
+    };
+
     return (
         <View style={restaurantStyles.screenContainer}>
             <ImageBackground
@@ -16,12 +45,30 @@ const RestaurantScreen = () => {
             />
             <View style={restaurantStyles.card}>
                 <View style={restaurantStyles.informationCard}>
-                    <Text style={restaurantStyles.header}>{name}</Text>
-                    <Text style={restaurantStyles.location}>{location}</Text>
-                    <Text style={restaurantStyles.house}>{hours}</Text>
+                    <View style={restaurantStyles.headerContainer}>
+                        <Text style={restaurantStyles.header}>{name}</Text>
+                        <TouchableOpacity onPress={handleFavoritePress}>
+                            {
+                                isFavorite
+                                    ? <AntDesign name="heart" size={32} color="#EC8677" />
+                                    : <AntDesign name="hearto" size={32} color="#EC8677" />
+                            }
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={restaurantStyles.location}>{address}</Text>
+                    <Text style={restaurantStyles.hours}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
+                    <TouchableOpacity onPress={() => 
+                        router.push({
+                            pathname: "/review", 
+                            params: { 
+                                rid: rid
+                            } 
+                        })}>
+                        <Text style={restaurantStyles.leaveReviewButton}>Leave a review</Text>
+                    </TouchableOpacity>
                 </View>
-                <View styles={restaurantStyles.starBreakdown}>
+                <View >
                     <View style={restaurantStyles.starBar}>
                         <Text style={restaurantStyles.starHead}>5</Text>
                         <FontAwesome name="star" size={18} color="#EC8677" />

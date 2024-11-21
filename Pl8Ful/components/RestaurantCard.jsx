@@ -4,15 +4,17 @@ import { useRouter } from "expo-router";
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from "../app/styleSheets/styles";
+import { getAllRestaurants } from './DatabaseCalls'
 
 // Mock function to fetch restaurant data
-const fetchRestaurant = async () => {
+export const fetchRestaurant = async () => {
     return [
-        { id: 1, name: "McDonalds", location: "5.1 mi", hours: "24/7", rating: 5 },
-        { id: 2, name: "Burger King", location: "4.8 mi", hours: "24/7", rating: 4.0 },
-        { id: 3, name: "Wendy's", location: "8.1 mi", hours: "24/7"},
-        { id: 4, name: "Taco Bell", location: "10.3 mi", hours: "24/7", rating: 3.5 },
-        { id: 5, name: "KFC", location: "7.2 mi", hours: "24/7", rating: 3.0 }
+        { rid: 1, name: "Alleia", location: "25 E Main St, Chattanooga, TN 37408", hours: "M-F: 5 - 9PM", rating: 4 },
+        { rid: 2, name: "STIR", location: "1444 Market St, Chattanooga, TN 37402", hours: "M-F: 11AM - 9PM", rating: 4 },
+        { rid: 3, name: "Upscale Chophouse", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
+        { rid: 4, name: "Scottie's On The River", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
+        { rid: 5, name: "Bridgeman's Chophouse", location: "107 W M.L.K. Blvd, Chattanooga, TN 37402", hours: "M-F: 5-10PM", rating: 4 },
+        { rid: 6, name: "Tony's Pasta Shop", location: "212 High St, Chattanooga, TN 37403", hours: "M-F: 11AM - 10PM", rating: 4 },
     ];
 };
 
@@ -23,10 +25,13 @@ const RestaurantCard = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            const data = await fetchRestaurant();
+            const data = await getAllRestaurants();
             setRestaurant(data);
+            console.log(data)
+            // Add in a way to sort after restaurant data is recieved
         };
         loadData();
+        
     }, []);
 
     const renderRestaurant = ({ item }) => {
@@ -36,11 +41,12 @@ const RestaurantCard = () => {
                 onPress={() => 
                     router.push({
                         pathname: "/restaurant", 
-                        params: { 
-                            name: item.name,
-                            location: item.location,
-                            hours: item.hours,
-                            rating: item.rating
+                        params: {
+                            rid: item.rid,
+                            name: item.name ?? '',
+                            address: item.address ?? '',
+                            hours: item.hours ?? '',
+                            rating: item.rating ?? null,
                         } 
                     })
                 }>
@@ -48,7 +54,7 @@ const RestaurantCard = () => {
                     <Text style={styles.linkHeader}>{item.name}</Text>
                     <View style={styles.linkLocation}>
                         <EvilIcons name="location" size={20} color="#34404D" />
-                        <Text style={styles.linkText}>{item.location}</Text>
+                        <Text style={styles.linkText}>{item.address}</Text>
                     </View>
                     <Text style={styles.linkHours}>Hours: {item.hours}</Text>
                     <Text style={styles.rating}>{starRating(item.rating)}</Text>
@@ -62,7 +68,7 @@ const RestaurantCard = () => {
             <FlatList
                 data={restaurant}
                 renderItem={renderRestaurant}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.rid != null ? item.rid.toString() : ''}
             />
         </View>
     );
