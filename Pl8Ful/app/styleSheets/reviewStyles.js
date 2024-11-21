@@ -57,6 +57,12 @@ const reviewStyles = StyleSheet.create({
         marginTop: 20,
         width: 100,
         alignSelf: "center"
+    },
+    close: {
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        padding: 10,
     }
 });
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"; 
-import { View, Text, TouchableOpacity, ActivityIndicator, TextInput, Button } from "react-native";
+import { View, Keyboard, Text, TouchableOpacity, ActivityIndicator, TextInput, Button } from "react-native";
 import reviewStyles from "../styleSheets/reviewStyles";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { createReview } from "../../components/ReviewFunctions";
+import { createReview } from "../../components/DatabaseCalls";
 import { auth } from "../../firebaseConfig";
 import ImageUpload from "../../components/ImageUpload";
+import restaurantStyles from "../styleSheets/restaurantStyles";
 
 
 
@@ -15,7 +16,8 @@ const ReviewScreen = () => {
     const [loading, setLoading] = useState(false);
     const [rating, setRating] = useState(0);
     const router = useRouter();
-    const rid = useLocalSearchParams();
+    const { rid } = useLocalSearchParams();
+
     const user = auth.currentUser;
 
     const renderStars = () => {
@@ -34,10 +36,13 @@ const ReviewScreen = () => {
         }
         return stars;
     };
-    console.log(rid);
 
     return (
         <View style={reviewStyles.container}>
+            <TouchableOpacity style={reviewStyles.close} onPress={() => {router.back()}}>
+                <AntDesign name="closecircleo" size={36} color="#34404D" />
+            </TouchableOpacity>
+            
             <View style={reviewStyles.reviewContainer}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                     <Text style={reviewStyles.reviewHeader}>Review</Text>
@@ -51,6 +56,8 @@ const ReviewScreen = () => {
                     placeholder="Title"
                     placeholderTextColor={"#b0b0b0"}
                     maxLength={50}
+                    returnKeyType="done"
+                    onSubmitEditing={Keyboard.dismiss}
                 />
                 <TextInput
                     style={reviewStyles.text}
@@ -58,10 +65,16 @@ const ReviewScreen = () => {
                     placeholder="Leave review here..."
                     placeholderTextColor={"#b0b0b0"}
                     multiline={true}
+                    returnKeyType="done"
+                    onSubmitEditing={Keyboard.dismiss}
                     maxLength={500}
                 />
                 <ImageUpload />
-                <TouchableOpacity style={reviewStyles.submitButton} title="Submit" onPress={() => {createReview(user.uid, rid, rating, title, text)}}>
+                <TouchableOpacity style={reviewStyles.submitButton} title="Submit" 
+                        onPress={() => {
+                            // console.log(rid, user.uid, title, text, rating)
+                            createReview(rid, user.uid, title, text, rating) ? router.back() : ''
+                            }}>
                     <Text style={{ color: "#FFFFFF", textAlign: "center", fontSize: 18, fontWeight: 700 }}>Submit</Text>
                 </TouchableOpacity>
             </View>

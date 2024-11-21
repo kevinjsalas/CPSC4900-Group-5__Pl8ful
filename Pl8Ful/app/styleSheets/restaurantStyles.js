@@ -74,10 +74,15 @@ const restaurantStyles = StyleSheet.create({
         fontWeight: "800",
         marginRight: 2,
         width: 15,
-        
+    },
+    starHead1: {
+        fontSize: 18,
+        fontWeight: "800",
+        marginRight: 2,
+        width: 15,
     },
     bar: {
-        height: 10,
+        height: 6,
         width: 100,
         backgroundColor: "#EC8677",
         borderRadius: 10,
@@ -112,7 +117,10 @@ const restaurantStyles = StyleSheet.create({
     },
     reviewsContainer: {
         marginBottom: 20,
-        flex: 1
+        justifyContent: "center",
+        alignItems: "center",
+        height: 100,
+        width: "95%"
     },
     reviewCard: {
         backgroundColor: "#fafafa",
@@ -155,7 +163,7 @@ const restaurantStyles = StyleSheet.create({
         fontStyle: "italic",
         color: "#34404D",
         width: 200,
-    }
+    },
 });
 
 export default restaurantStyles;

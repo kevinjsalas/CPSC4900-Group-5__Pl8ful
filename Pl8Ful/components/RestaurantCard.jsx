@@ -6,19 +6,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import styles from "../app/styleSheets/styles";
 import { getAllRestaurants } from './DatabaseCalls'
 
-// Mock function to fetch restaurant data
-export const fetchRestaurant = async () => {
-    return [
-        { rid: 1, name: "Alleia", location: "25 E Main St, Chattanooga, TN 37408", hours: "M-F: 5 - 9PM", rating: 4 },
-        { rid: 2, name: "STIR", location: "1444 Market St, Chattanooga, TN 37402", hours: "M-F: 11AM - 9PM", rating: 4 },
-        { rid: 3, name: "Upscale Chophouse", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
-        { rid: 4, name: "Scottie's On The River", location: "491 Riverfront Pkwy, Chattanooga, TN 37402", hours: "M-F: 11AM - 12AM", rating: 4 },
-        { rid: 5, name: "Bridgeman's Chophouse", location: "107 W M.L.K. Blvd, Chattanooga, TN 37402", hours: "M-F: 5-10PM", rating: 4 },
-        { rid: 6, name: "Tony's Pasta Shop", location: "212 High St, Chattanooga, TN 37403", hours: "M-F: 11AM - 10PM", rating: 4 },
-    ];
-};
 
-// RestaurantCard component
+// RestaurantCard component 
 const RestaurantCard = () => {
     const [restaurant, setRestaurant] = useState([]);
     const router = useRouter();
@@ -27,7 +16,6 @@ const RestaurantCard = () => {
         const loadData = async () => {
             const data = await getAllRestaurants();
             setRestaurant(data);
-            console.log(data)
             // Add in a way to sort after restaurant data is recieved
         };
         loadData();

@@ -15,7 +15,7 @@ const favoritesStyles = StyleSheet.create({
       marginTop: 10,
       left: 7,
       color: '#34404D',
-      fontSize: 24,
+      fontSize: 36,
       fontWeight: '900',
     },
 

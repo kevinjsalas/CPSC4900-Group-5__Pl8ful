@@ -7,6 +7,9 @@ import restaurantStyles from "../styleSheets/restaurantStyles";
 import { getFavorites, removeFavorite, saveFavorite, checkFavorite} from "../simDB/favoriteRestaurants";
 import { auth } from "../../firebaseConfig";
 import { useState, useEffect } from "react";
+import { isFavorite, setFavorite } from "../../components/DatabaseCalls"
+import { openAppleMaps } from "../../components/openmaps";
+import ReviewCard from "../../components/ReviewCard";
 
 
 const RestaurantScreen = () => {
@@ -15,12 +18,12 @@ const RestaurantScreen = () => {
     const router = useRouter();
     const user = auth.currentUser;
 
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [favoriteStatus, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const fetchFavoriteStatus = async () => {
             if (user) {
-                const favoriteStatus = await checkFavorite(restaurant.rid, user.uid);
+                const favoriteStatus = await isFavorite(user.uid, restaurant.rid);
                 setIsFavorite(favoriteStatus);
             }
         };
@@ -29,7 +32,7 @@ const RestaurantScreen = () => {
 
     const handleFavoritePress = async () => {
         if (user) {
-            await saveFavorite(restaurant, user.uid);
+            await setFavorite(user.uid, restaurant.rid);
             setIsFavorite((prev) => !prev);
         } else {
             console.log("User is not authenticated.");
@@ -49,20 +52,22 @@ const RestaurantScreen = () => {
                         <Text style={restaurantStyles.header}>{name}</Text>
                         <TouchableOpacity onPress={handleFavoritePress}>
                             {
-                                isFavorite
+                                favoriteStatus
                                     ? <AntDesign name="heart" size={32} color="#EC8677" />
                                     : <AntDesign name="hearto" size={32} color="#EC8677" />
                             }
                         </TouchableOpacity>
                     </View>
-                    <Text style={restaurantStyles.location}>{address}</Text>
+                    <TouchableOpacity onPress={() => {openAppleMaps(address)}}>
+                        <Text style={restaurantStyles.location}>{address}</Text>
+                    </TouchableOpacity>
                     <Text style={restaurantStyles.hours}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
                     <TouchableOpacity onPress={() => 
                         router.push({
                             pathname: "/review", 
                             params: { 
-                                rid: rid
+                                rid: rid,
                             } 
                         })}>
                         <Text style={restaurantStyles.leaveReviewButton}>Leave a review</Text>
@@ -72,7 +77,7 @@ const RestaurantScreen = () => {
                     <View style={restaurantStyles.starBar}>
                         <Text style={restaurantStyles.starHead}>5</Text>
                         <FontAwesome name="star" size={18} color="#EC8677" />
-                        <Text style={restaurantStyles.starHead}>:</Text>
+                        <Text style={restaurantStyles.starHead1}>:</Text>
                         <View style={restaurantStyles.bar}></View>
                         <Text style={restaurantStyles.barNum}>50</Text>
                     </View>
@@ -105,7 +110,8 @@ const RestaurantScreen = () => {
                         <Text style={restaurantStyles.barNum}>50</Text>
                     </View>
                 </View>
-                <View style={restaurantStyles.filterBar}>
+                <ReviewCard restaurantId={rid}/>
+                {/* <View style={restaurantStyles.filterBar}>
                     <Text style={restaurantStyles.filterHeader1}>Reviews</Text>
                     <View style={restaurantStyles.filterButton}>
                         <Text style={restaurantStyles.filterHeader2}>Sort by:  </Text>
@@ -149,7 +155,7 @@ const RestaurantScreen = () => {
                             <Text style={restaurantStyles.reviewText}>Short review</Text>
                         </View>
                     </View>
-                </ScrollView>
+                </ScrollView> */}
             </View>
         </View>
     );

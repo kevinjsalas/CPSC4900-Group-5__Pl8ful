@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { View, Text, FlatList, Button, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
 import favoritesStyles from "../styleSheets/favoritesStyles";
-import { fetchRestaurant } from "../../components/RestaurantCard";
 import FavoritesCard from "../../components/FavoritesCard";
 
 const FavoritesScreen = () => {
