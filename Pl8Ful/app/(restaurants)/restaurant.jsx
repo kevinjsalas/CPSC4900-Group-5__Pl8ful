@@ -7,11 +7,11 @@ import restaurantStyles from "../styleSheets/restaurantStyles";
 import { getFavorites, removeFavorite, saveFavorite, checkFavorite} from "../simDB/favoriteRestaurants";
 import { auth } from "../../firebaseConfig";
 import { useState, useEffect } from "react";
-
+import {openAppleMaps} from "../../components/openmaps"; // Adjust the path based on your project structure
 
 const RestaurantScreen = () => {
-    const { rid, name, address, hours, rating } = useLocalSearchParams();
-    const restaurant = { rid, name, address, hours, rating };
+    const { rid, name, address, hours, rating, latitude, longitude } = useLocalSearchParams(); // Assume latitude and longitude are passed
+    const restaurant = { rid, name, address, hours, rating, latitude, longitude };
     const router = useRouter();
     const user = auth.currentUser;
 
@@ -39,9 +39,9 @@ const RestaurantScreen = () => {
     return (
         <View style={restaurantStyles.screenContainer}>
             <ImageBackground
-            source={{ uri: 'https://marketplace.canva.com/EAFA7Zl1wfs/1/0/1600w/canva-pastel-red-green-illustrative-element-centric-video-background-Rs7EVOqIM2c.jpg' }}
-            style={restaurantStyles.topBar}
-            resizeMode="cover"
+                source={{ uri: 'https://marketplace.canva.com/EAFA7Zl1wfs/1/0/1600w/canva-pastel-red-green-illustrative-element-centric-video-background-Rs7EVOqIM2c.jpg' }}
+                style={restaurantStyles.topBar}
+                resizeMode="cover"
             />
             <View style={restaurantStyles.card}>
                 <View style={restaurantStyles.informationCard}>
@@ -55,7 +55,9 @@ const RestaurantScreen = () => {
                             }
                         </TouchableOpacity>
                     </View>
-                    <Text style={restaurantStyles.location}>{address}</Text>
+                    <TouchableOpacity onPress={() => {openAppleMaps(address)}}>
+                        <Text style={restaurantStyles.location}>{address}</Text>
+                    </TouchableOpacity>
                     <Text style={restaurantStyles.hours}>{hours}</Text>
                     <View style={restaurantStyles.rating}>{starRating(rating)}</View>
                     <TouchableOpacity onPress={() => 
@@ -68,6 +70,7 @@ const RestaurantScreen = () => {
                         <Text style={restaurantStyles.leaveReviewButton}>Leave a review</Text>
                     </TouchableOpacity>
                 </View>
+
                 <View >
                     <View style={restaurantStyles.starBar}>
                         <Text style={restaurantStyles.starHead}>5</Text>

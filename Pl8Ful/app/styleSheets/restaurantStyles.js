@@ -58,6 +58,10 @@ const restaurantStyles = StyleSheet.create({
         fontSize: 14,
         color: "#B0B0B0",
     },
+    openmapsbutton: {
+        fontSize: 14,
+        color: "#B0B0B0",
+    },
     starBreakdown: {
         flexDirection: "column",
         marginBottom: 20,
